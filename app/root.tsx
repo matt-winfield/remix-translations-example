@@ -43,6 +43,7 @@ import {
 	DropdownMenuTrigger,
 } from './components/ui/dropdown-menu.tsx'
 import { Icon, href as iconsHref } from './components/ui/icon.tsx'
+import i18next from './i18next.server.ts'
 import fontStyleSheetUrl from './styles/font.css'
 import tailwindStyleSheetUrl from './styles/tailwind.css'
 import { authenticator, getUserId } from './utils/auth.server.ts'
@@ -97,6 +98,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
 export async function loader({ request }: DataFunctionArgs) {
 	const timings = makeTimings('root loader')
+	const locale = await i18next.getLocale(request)
 	const userId = await time(() => getUserId(request), {
 		timings,
 		type: 'getUserId',
@@ -139,6 +141,7 @@ export async function loader({ request }: DataFunctionArgs) {
 
 	return json(
 		{
+			locale,
 			user,
 			requestInfo: {
 				hints: getHints(request),

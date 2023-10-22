@@ -8,6 +8,7 @@ export default {
 	ignoredRouteFiles: ['**/*'],
 	serverModuleFormat: 'esm',
 	serverPlatform: 'node',
+	serverDependenciesToBundle: ['remix-i18next', 'accept-language-parser'],
 	tailwind: true,
 	postcss: true,
 	watchPaths: ['./tailwind.config.ts'],
